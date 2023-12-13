@@ -14,11 +14,16 @@ debug = DebugToolbarExtension(app)
 
 
 connect_db(app)
-
-def before_first_request():
-    db.create_all()
+app.app_context().push()
+db.create_all()
 
 @app.route('/')
 def index():    
-    return "Blogly app is running!"
+    users = User.query.all()
+    return render_template("users.html", users=users)
 
+
+
+
+if __name__ == '__main__':
+    app.run()
