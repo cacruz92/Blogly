@@ -48,5 +48,12 @@ def show_user(user_id):
     user = User.query.get_or_404(user_id)
     return render_template("userdetails.html", user=user)
 
+@app.route('/edit-user/<int:user_id>')
+def show_edit_form(user_id):
+    """Populates the form that allows you to edit a particular user"""
+    user = User.query.get_or_404(user_id)
+    return render_template("edituser.html", user=user)
+
+
 if __name__ == '__main__':
     app.run()
