@@ -9,7 +9,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = "Secret!"
-app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
+#app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 debug = DebugToolbarExtension(app)
 
 
@@ -18,6 +18,11 @@ app.app_context().push()
 db.create_all()
 
 @app.route('/')
+def show_homepage():
+    """redirects to users page""" 
+    return redirect("/users")
+
+@app.route('/users')
 def list_users():
     """List Users and show button to open form to add user""" 
     users = User.query.all()
@@ -53,6 +58,17 @@ def show_edit_form(user_id):
     """Populates the form that allows you to edit a particular user"""
     user = User.query.get_or_404(user_id)
     return render_template("edituser.html", user=user)
+
+@app.route('/users/<int:user_id>/edit', methods=["POST"])
+def edit_user(user_id):
+    """Edits existing user."""
+    user = User.query.get_or_404(user_id)
+    user.first_name = request.form["first-name"]
+    user.last_name = request.form["last-name"]
+    user.image_url = request.form["user-image"]
+    db.session.commit()
+
+    return redirect("/")
 
 @app.route('/users/<int:user_id>/delete', methods=["POST"])
 def delete_user(user_id):

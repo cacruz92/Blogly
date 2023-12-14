@@ -5,7 +5,7 @@
 {% block content %}
 
 <h2>Edit a user</h2>
-<form action="">
+<form action="/users/{{user.id}}/edit" method="POST">
     <label for="first-name">First Name:</label>
     <input type="text" name="first-name" id="first-name" placeholder="Enter a first name">
     <br><label for="first-name">Last Name:</label>
@@ -13,9 +13,15 @@
     <br><label for="first-name">Image URL:</label>
     <input type="text" name="user-image" id="user-image" placeholder="Provide an image of this user">
     <br>
-
-    <button>cancel</button>
     <button>save</button>
   </form>
+
+  <form action="/users/{{user.id}}">
+    <button>cancel</button>
+  </form>
+  
+ 
+  
+
 
 {% endblock %}
