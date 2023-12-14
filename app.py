@@ -48,11 +48,19 @@ def show_user(user_id):
     user = User.query.get_or_404(user_id)
     return render_template("userdetails.html", user=user)
 
-@app.route('/edit-user/<int:user_id>')
+@app.route('/users/<int:user_id>/edit')
 def show_edit_form(user_id):
     """Populates the form that allows you to edit a particular user"""
     user = User.query.get_or_404(user_id)
     return render_template("edituser.html", user=user)
+
+@app.route('/users/<int:user_id>/delete', methods=["POST"])
+def delete_user(user_id):
+    """Deletes user from table"""
+    user = User.query.get_or_404(user_id)
+    db.session.delete(user)
+    db.session.commit()
+    return redirect("/")
 
 
 if __name__ == '__main__':

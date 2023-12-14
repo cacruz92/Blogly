@@ -6,7 +6,8 @@
 
 <img src="{{user.image_url}}" alt="User Image" width="300" height="300">
 <h2>{{user.first_name}} {{user.last_name}}</h2>
-<a href="/edit-user/{{user.id}}"><button>Edit</button></a>
-<a href=""><button>Delete</button></a>
+<form action="/users/{{user.id}}/edit"><button>Edit</button></form>
+
+<form action="/users/{{user.id}}/delete" method="POST"><button>Delete</button></form>
 
 {% endblock %}
