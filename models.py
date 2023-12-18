@@ -18,3 +18,14 @@ class User(db.Model):
     first_name = db.Column(db.String(25), nullable=False)
     last_name = db.Column(db.String(25), nullable=False)
     image_url = db.Column(db.String(1500), nullable = False, default='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTArDP_bnVwv1r88E7xDWOt6utBQv1HdPsensjcjjtwfg&s')
+
+class Post(db.Model):
+    """User posts"""
+
+    __tablename__ = "posts"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    title = db.Column(db.Text, nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.now)
+    user_id = db.Column(db.Text, db.ForeignKey('users.id'), nullable=False)
