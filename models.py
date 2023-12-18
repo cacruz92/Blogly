@@ -28,4 +28,4 @@ class Post(db.Model):
     title = db.Column(db.Text, nullable=False)
     content = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.now)
-    user_id = db.Column(db.Text, db.ForeignKey('users.id'), nullable=False)
+    user = db.Column(db.Text, db.ForeignKey('users.id'), nullable=False)
