@@ -55,6 +55,27 @@ def show_user(user_id):
     user = User.query.get_or_404(user_id)
     return render_template("userdetails.html", user=user)
 
+@app.route('/users/<int:user_id>/edit', methods=["POST"])
+def edit_user(user_id):
+    """Edits existing user."""
+    user = User.query.get_or_404(user_id)
+    user.first_name = request.form["first-name"]
+    user.last_name = request.form["last-name"]
+    user.image_url = request.form["user-image"]
+    db.session.commit()
+
+    return redirect("/")
+
+@app.route('/users/<int:user_id>/delete', methods=["POST"])
+def delete_user(user_id):
+    """Deletes user from table"""
+    user = User.query.get_or_404(user_id)
+    db.session.delete(user)
+    db.session.commit()
+    return redirect("/")
+
+# Post routes
+
 
 @app.route('/users/<int:user_id>/posts/new')
 def show_new_post_form(user_id):    
@@ -83,19 +104,6 @@ def show_post(post_id):
     post = Post.query.get_or_404(post_id)
     return render_template("postdetails.html", post=post)
 
-
-
-@app.route('/users/<int:user_id>/edit', methods=["POST"])
-def edit_user(user_id):
-    """Edits existing user."""
-    user = User.query.get_or_404(user_id)
-    user.first_name = request.form["first-name"]
-    user.last_name = request.form["last-name"]
-    user.image_url = request.form["user-image"]
-    db.session.commit()
-
-    return redirect("/")
-
 @app.route('/posts/<int:post_id>/edit', methods=["POST"])
 def edit_post(post_id):
     """Edits existing post."""
@@ -113,14 +121,6 @@ def show_edit_user_form(post_id):
     """Populates the form that allows you to edit a particular post"""
     post = Post.query.get_or_404(post_id)
     return render_template("editpost.html", post=post)
-
-@app.route('/users/<int:user_id>/delete', methods=["POST"])
-def delete_user(user_id):
-    """Deletes user from table"""
-    user = User.query.get_or_404(user_id)
-    db.session.delete(user)
-    db.session.commit()
-    return redirect("/")
 
 @app.route('/posts/<int:post_id>/delete', methods=["POST"])
 def delete_post(post_id):
