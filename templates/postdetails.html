@@ -17,6 +17,9 @@
     <button class="btn btn-danger"
             formmethod="POST"
             formaction="/posts/{{post.id}}/delete">Delete</button>
-  </form>
+</form>
 
+<form action="/users/{{post.user.id}}">
+    <button>Back to user page</button>
+</form>
 {% endblock %}
