@@ -8,14 +8,12 @@
   <ul>
     {% for tag in tags %}
     <li>
-      <a href="{{}}">{{tag.name}}</a>
-    <!-- this should bring you to the show tag page -->
+      <a href="/tags/{{tag.id}}">{{tag.name}}</a>
     </li>
     {% endfor %}
   </ul>
 
-  <form action="">
-    <!-- this should take you to the newtag form -->
+  <form action="/tags/new">
     <button>Add Tag</button>
   </form>
 

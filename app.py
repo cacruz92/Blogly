@@ -130,6 +130,35 @@ def delete_post(post_id):
     db.session.commit()
     return redirect("/")
 
+# Tag Routes
+
+@app.route('/tags')
+def list_users():
+    """Lists all tags, with links to the tag detail page.""" 
+    tags = Tag.query.all()
+    return render_template("tags.html", tags=tags)
+
+@app.route('/tags/<int:tag_id>')
+def show_tag(tag_id):
+    """Show detail about a tag. Have links to edit form and to delete."""
+    tag = Tag.query.get_or_404(tag_id)
+    return render_template("showtag.html", tag=tag)
+
+@app.route('/tags/new')
+def show_new_tag_form():
+    """Shows a form to add a new tag"""
+    return render_template("newtagform.html")
+
+@app.route('/tags/new', methods=["POST"])
+def show_new_tag_form():
+    """Process add form, adds tag, and redirect to tag list"""
+    name = request.form["name"]
+
+    new_tag = Tag(name = name)
+    db.session.add(new_tag)
+    db.session.commit()
+
+    return redirect(f"/users/{new_user.id}")
 
 if __name__ == '__main__':
     app.run()
