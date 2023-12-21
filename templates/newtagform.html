@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Create a Tag{% endblock %}
+
+{% block content %}
+<h1>Create a tag</h1>
+
+<form action="" method="POST">
+
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" value="{{tag.name}}">
+    <button>Edit</button>
+  </form>
+  <form action=""">
+    <!-- action should go back to the tag.html page -->
+    <button>Cancel</button>
+  </form>
+
+{% endblock %}
