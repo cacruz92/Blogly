@@ -5,11 +5,11 @@
 {% block content %}
 <h1>Create a tag</h1>
 
-<form action="" method="POST">
+<form action="/tags/new" method="POST">
 
     <label for="name">Name:</label>
-    <input type="text" name="name" id="name" value="{{tag.name}}">
-    <button>Edit</button>
+    <input type="text" name="name" placeholder="Enter new tag here">
+    <button>Add</button>
   </form>
   <form action="/tags">
     <button>Cancel</button>

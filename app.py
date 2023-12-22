@@ -158,7 +158,32 @@ def show_new_tag_form():
     db.session.add(new_tag)
     db.session.commit()
 
-    return redirect(f"/users/{new_user.id}")
+    return redirect("/tags")
+
+@app.route('/tags/<int:tag_id>/edit')
+def show_edit_tag_form():
+    """Shows a form to edit tag"""
+    return render_template("edittag.html")
+
+@app.route('/tags/<int:tag_id>/edit', methods=["POST"])
+def show_edit_tag_form():
+    """Process edit form, edit tag, and redirects to the tags list. """
+    tag = Post.query.get_or_404(tag_id)
+    tag.name = request.form["name"]
+
+    db.session.add(tag)
+    db.session.commit()
+
+    return redirect("/tags")
+
+@app.route('/tags/<int:tag_id>/delete', methods=["POST"])
+def delete_post(tag_id):
+    """Deletes tag from table"""
+    tag = Post.query.get_or_404(tag_id)
+
+    db.session.delete(tag)
+    db.session.commit()
+    return redirect("/tags")
 
 if __name__ == '__main__':
     app.run()
