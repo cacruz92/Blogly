@@ -11,8 +11,16 @@
     <input type="text" name="title" id="title" value="{{post.title}}">
     <br>
     <label for="content">Post Content:</label>
-    <textarea type="text " name="content" id=content" placeholder="Once upon a time...">
+    <textarea type="textarea" name="content" id=content">
     {{post.content}}</textarea>
+
+    <div>
+      {% for tag in tags %}
+      <input type="checkbox" value="{{tag.id}}" id="tag_{{tag.id}}" name="tags">
+      <label for="tag_{{tag.id}}">{{tag.name}}</label>
+      {% endfor %}
+    </div>
+
     <button>Edit</button>
   </form>
   <form action="/posts/{{post.id}}">
