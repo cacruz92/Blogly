@@ -18,8 +18,10 @@
             formaction="/tags/{{tag.id}}/edit">Edit</button>
 
     <button formmethod="POST"
-            formaction="">Delete</button>
-            <!-- go to the delete route -->
+            formaction="/tags/{{tag.id}}/delete">Delete</button>
   </form>
 
+  <form action="/tags">
+    <button>Back to Tag List</button>
+  </form>
 {% endblock %}
