@@ -47,7 +47,7 @@ class PostTag(db.Model):
     """Mapping of posts with tags"""
 
     __tablename__ = "post_tags"
-
-    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), primary_key=True)
-    tag_id = db.Column(db.Integer, db.ForeignKey('tags.id', primary_key=True))
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
+    tag_id = db.Column(db.Integer, db.ForeignKey('tags.id'))
 

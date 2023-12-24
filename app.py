@@ -80,6 +80,7 @@ def delete_user(user_id):
     db.session.commit()
     return redirect("/")
 
+
 # Post routes
 
 
@@ -99,10 +100,13 @@ def add_post(user_id):
     content = request.form["content"]
 
     tag_ids = [int(num) for num in request.form.getlist("tags")]
-    tags = Tag.query.filter(Tag.id.in_(tag_ids)).all()
 
 
-    new_post = Post(title=title, content=content, user=user, tags=tags)
+    new_post = Post(title=title, content=content, user=user)
+    for tag_id in tag_ids:
+        tag = Tag.query.get(tag_id)
+        new_post.tags.append(tag)
+
     db.session.add(new_post)
     db.session.commit()
 
